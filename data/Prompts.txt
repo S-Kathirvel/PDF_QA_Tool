@@ -1,0 +1,12 @@
+List the widgets available in twixor encaps?
+what is twixor encaps?
+Explain campaign modules in twixor encaps?
+Name some use cases of Twixor.
+What is twixor encaps rest api.
+How to test launch configuration.
+what are some of the useful features of Twixor encaps
+What customization options are available with the EnCap Theme feature?
+What is whatsapp journey.
+explain node type and log type
+what is encaps?
+How to create a flow?
