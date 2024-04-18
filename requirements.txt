@@ -1,0 +1,10 @@
+transformers==4.39
+einops
+accelerate
+bitsandbytes
+llama-index
+llama-index-llms-huggingface
+sentence-transformers
+llama-index-embeddings-huggingface
+llmsherpa 
+llama-index-readers-smart-pdf-loader 
