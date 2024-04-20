@@ -1,4 +1,4 @@
-from .query_engine import query_engine, res
+from query_engine import query_engine, res
 
 import time
 
