@@ -6,13 +6,18 @@ from llama_index.core.prompts.prompts import SimpleInputPrompt
 
 # For quantization of the model (if needed)
 from transformers import BitsAndBytesConfig
+import bitsandbytes
 import torch
 
-# For embedding
+# For embedding and model loading
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.huggingface import HuggingFaceLLM
 from llama_index.core import Settings
 from llama_index.core.node_parser import SentenceSplitter
 
+# for authentication
+# from transformers import HfHubToken
+import os
 
 
 """# **STEP 2: LOADING THE LLM AND EMBEDDING MODELS FROM LOCAL STORAGE** #
@@ -22,7 +27,7 @@ system_prompt='''You are a Q&A assistant. Try your best to answer the user's que
 query_wrapper_prompt = SimpleInputPrompt("<|USER|>{query_str}<|ASSISTANT|>")
 """
 
-syst_prompt="""You are a Q&A assistant designed to answer user questions in a concise and informative way. Use the information from the documents and your knowledge to provide short answers that directly address the user's intent. Avoid generating irrelevant text before the answer
+system_prompt="""You are a Q&A assistant designed to answer user questions in a concise and informative way. Use the information from the documents and your knowledge to provide short answers that directly address the user's intent. Avoid generating irrelevant text before the answer
     Make sure to answer it correctly and precisely and do not generate any incomplete sentences
     Don't add more queries to the existing responses, just answer the prompt and terminate the generation of response and the response should be only relevant to the context extracted from the documents and also the contents of the document feeded into the model
     GIVE SHORT ANSWERS FOR ALL QUESTIONS MINIMUM 2 SENTENCES MAXIMUM 5 OR 6 SENTENCES ONLY
@@ -40,22 +45,26 @@ syst_prompt="""You are a Q&A assistant designed to answer user questions in a co
 
 query_wrapper_prompt = SimpleInputPrompt("<|USER|>{query_str}<|ASSISTANT|>")
 
-# Load the LLM model from local storage
-model_name = "path/to/your/llamada_model"  # Replace with the path to your model
-tokenizer_name = "path/to/your/tokenizer"  # Replace with the path to your tokenizer
-llm = AutoModelForSeq2SeqLM.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
 
 # (Optional) Load the quantization configuration if needed
-# quantization_config = BitsAndBytesConfig(
-#     load_in_4bit=True,
-#     bnb_4bit_compute_dtype=torch.float16,
-#     bnb_4bit_quant_type="nf4",
-#     bnb_4bit_use_double_quant=True,
-# )
-# llm = llm.to(device_map="auto")  # Move the model to the appropriate device
-# llm.model_kwargs = {"torch_dtype": torch.float16, "quantization_config": quantization_config}
+quantization_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_compute_dtype=torch.float16,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_use_double_quant=True,
+)
 
+llm = HuggingFaceLLM(
+context_window=2000,
+max_new_tokens=200,
+generate_kwargs={"temperature": 0.50, "do_sample": True},
+system_prompt=system_prompt,
+query_wrapper_prompt=query_wrapper_prompt,
+tokenizer_name="meta-llama/Meta-Llama-3-8B",
+model_name="meta-llama/Meta-Llama-3-8B",
+device_map="cuda",
+model_kwargs={"torch_dtype": torch.float16 ,"quantization_config": quantization_config }
+)
 # Load the embedding model from local storage
 embed_model = AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L12-v2")
 
