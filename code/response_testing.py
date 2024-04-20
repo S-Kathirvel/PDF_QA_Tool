@@ -1,6 +1,6 @@
 import time
-from .interactive_qa import interactive_qa
-prompt_file = "data/Prompts.txt"  # Replace with your actual filename
+from interactive_qa import interactive_qa
+prompt_file = "F:/Pdf_QA/data/Prompts.txt"  # Replace with your actual filename
 start_t = time.time()
 #Open the file in read mode
 with open(prompt_file, "r") as file:
@@ -11,7 +11,7 @@ with open(prompt_file, "r") as file:
     # Call the ask function with the current prompt
     print(f"Prompt: {prompt}")
     interactive_qa(prompt)
-    time
+    # t
     print("-" * 100)
 
 end_t = time.time()

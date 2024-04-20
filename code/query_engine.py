@@ -2,8 +2,8 @@ from llama_index.core import VectorStoreIndex
 from llama_index.core import Settings
 
 # Load the previously defined models (llm and embed_model) from model_loading.py
-from .model_loading import llm, embed_model
-from .data_processing import documents
+from model_loading import llm, embed_model
+from data_processing import documents
 
 def create_query_engine(documents):
   """
