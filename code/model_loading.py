@@ -15,9 +15,6 @@ from llama_index.llms.huggingface import HuggingFaceLLM
 from llama_index.core import Settings
 from llama_index.core.node_parser import SentenceSplitter
 
-# for authentication
-# from transformers import HfHubToken
-import os
 
 
 """# **STEP 2: LOADING THE LLM AND EMBEDDING MODELS FROM LOCAL STORAGE** #
