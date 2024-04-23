@@ -57,8 +57,8 @@ max_new_tokens=200,
 generate_kwargs={"temperature": 0.50, "do_sample": True},
 system_prompt=system_prompt,
 query_wrapper_prompt=query_wrapper_prompt,
-tokenizer_name="meta-llama/Meta-Llama-3-8B",
-model_name="meta-llama/Meta-Llama-3-8B",
+tokenizer_name="mistralai/Mistral-7B-Instruct-v0.2",
+model_name="mistralai/Mistral-7B-Instruct-v0.2",
 device_map="cuda",
 model_kwargs={"torch_dtype": torch.float16 ,"quantization_config": quantization_config }
 )
