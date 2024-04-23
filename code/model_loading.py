@@ -57,12 +57,12 @@ max_new_tokens=200,
 generate_kwargs={"temperature": 0.50, "do_sample": True},
 system_prompt=system_prompt,
 query_wrapper_prompt=query_wrapper_prompt,
-tokenizer_name="mistralai/Mistral-7B-Instruct-v0.2",
-model_name="mistralai/Mistral-7B-Instruct-v0.2",
+tokenizer_name="MODEL_NAME",
+model_name="MODEL_NAME",
 device_map="cuda",
 model_kwargs={"torch_dtype": torch.float16 ,"quantization_config": quantization_config }
 )
 # Load the embedding model from local storage
-embed_model = AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L12-v2")
+embed_model = AutoModel.from_pretrained("EMBED_MODEL_NAME")
 
 Settings.transformations = [SentenceSplitter(chunk_size=1024, chunk_overlap=20)]
