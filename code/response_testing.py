@@ -1,6 +1,6 @@
 import time
 from interactive_qa import interactive_qa
-prompt_file = "F:/Pdf_QA/data/Prompts.txt"  # Replace with your actual filename
+prompt_file = "./data/Prompts.txt"  # Replace with your actual filename
 start_t = time.time()
 #Open the file in read mode
 with open(prompt_file, "r") as file:
