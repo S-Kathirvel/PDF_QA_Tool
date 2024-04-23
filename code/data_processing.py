@@ -3,7 +3,7 @@ from llama_index.core import SimpleDirectoryReader
 
 
 # Define LLMSherpa API URL (if applicable)
-llmsherpa_api_url = "https://readers.llmsherpa.com/api/document/developer/parseDocument?renderFormat=all"
+# llmsherpa_api_url = "https://readers.llmsherpa.com/api/document/developer/parseDocument?renderFormat=all"
 
 
 def load_data(data_path):
@@ -27,5 +27,5 @@ def load_data(data_path):
   return documents
 
 # Example usage (assuming you have a PDF file named "Twixor.pdf")
-pdf_url = "F:/Pdf_QA/data/"
+pdf_url = "PATH_TO_YOUR_DOCUMENT"
 documents = load_data(pdf_url)
