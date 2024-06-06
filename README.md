@@ -39,4 +39,5 @@ After setting up everything just run the '`prompt_testing.py`' and if you get a 
 
 ---
 > Currently working on making this a interactive tool ,to have conversations with the document content
-#### Note : The Code is still under development
+#### Note : The Code is still under development, currently working on implementing rag on csv files in addition to pdfs
+]
