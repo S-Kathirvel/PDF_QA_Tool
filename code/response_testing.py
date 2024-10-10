@@ -1,19 +1,21 @@
-import time
-from interactive_qa import interactive_qa
-prompt_file = "./data/Prompts.txt"  # Replace with your actual filename
-start_t = time.time()
-#Open the file in read mode
-with open(prompt_file, "r") as file:
-  #Loop through each line (prompt) in the file
-  for line in file:
-    # Remove trailing newline character (if any)
-    prompt = line.strip()
-    # Call the ask function with the current prompt
-    print(f"Prompt: {prompt}")
-    interactive_qa(prompt)
-    # t
-    print("-" * 100)
+# response_testing.py
 
-end_t = time.time()
-response_t = end_t - start_t
-print(response_t)
+import time
+
+def ask_query(query, embed_model, index, llm):
+    """
+    Query the engine and return the response.
+    """
+    query_engine = index.as_query_engine(llm=llm)
+    start_time = time.time()
+    response = query_engine.query(query)
+    end_time = time.time()
+    response_time = end_time - start_time
+    
+    # Handle the response (assume it’s a dictionary)
+    if isinstance(response, dict):
+        answer = response.get('answer')
+        if answer:
+            return answer, response_time
+    else:
+        return response, response_time
